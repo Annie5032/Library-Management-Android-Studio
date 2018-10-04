@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">LibraryManagement</string>
+    <string name="app_name">Library Management</string>
     <string name="action_settings">Settings</string>
+    <string name="search_publisher">Search By Publisher</string>
+    <string name="search">Search</string>
+    <string name="comm_searched">Commonly Searched</string>
+    <string name="pub">publisher</string>
+
 </resources>
