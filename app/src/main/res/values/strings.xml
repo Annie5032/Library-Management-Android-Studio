@@ -5,5 +5,7 @@
     <string name="search">Search</string>
     <string name="comm_searched">Commonly Searched</string>
     <string name="pub">publisher</string>
+    <string name="pub_results">Results</string>
+    <string name="back_button">Back Button Goes Here </string>
 
 </resources>

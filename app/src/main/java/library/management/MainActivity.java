@@ -1,5 +1,6 @@
 package library.management;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -22,8 +23,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // get fragment manager
+
+        //see if fragments are already loaded
+
         FragmentManager fm = getSupportFragmentManager();
+        Fragment f = fm.findFragmentById(R.id.commonlysearched);
+
+        if( f instanceof CommSearchFragment || f instanceof PubResultFragment) {
+            return;
+        }
+
+        // get fragment manager
         FragmentTransaction ft = fm.beginTransaction();
         //replace empty frames with fragments
         ft.replace(R.id.publishersearch, new PubSearchFragment());
@@ -35,15 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
     //called when the user presses the search button
     public void searchPublisher(View view){
-        Intent intent = new Intent(this, LoadDatabaseActivity.class);
-        EditText editText = (EditText) findViewById(R.id.PublisherSearch);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.commonlysearched, new PubResultFragment());
+        ft.commit();
     }
 
-
-
+    public void Back(View view){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.commonlysearched, new CommSearchFragment());
+        ft.commit();
+    }
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
